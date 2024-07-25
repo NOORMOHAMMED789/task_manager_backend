@@ -52,9 +52,21 @@ const deleteTask = asyncHandlers(async (req, res) => {
   })
 });
 
+const getSingleTask = asyncHandlers(async (req, res) => {
+    const taskId = req.query.taskId;
+    const singleTaskResp = await taskModel.find({
+        taskId: taskId
+    })
+    res.status(HttpStatusCode.Ok).json({
+      message: "success",
+      singleTaskResp,
+    });
+})
+
 module.exports = {
   createNewTask,
   updateTask,
   getAllTasks,
+  getSingleTask,
   deleteTask
 };
